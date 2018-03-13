@@ -55,6 +55,28 @@ function displayCardSymbol(e) {
   let clickedCard = e.target;
   openCards.push(clickedCard);
   console.log(openCards);
-};
+  isMatch();
+}
+
+function isMatch() {
+  if (openCards.length === 2) {
+    console.log('Two open cards');
+    if (openCards[0].innerHTML === openCards[1].innerHTML) {
+      console.log('Matched');
+      for (let i = 0; i < openCards.length; i++) {
+        openCards[i].classList.add('match');
+      }
+      openCards.length = 0;
+      console.log(openCards);
+    } else {
+      console.log('Not matched');
+      for (let i = 0; i < openCards.length; i++) {
+        openCards[i].classList.remove('show', 'open');
+      }
+      openCards.length = 0;
+      console.log(openCards);
+    }
+  }
+}
 
 memoryGame();
