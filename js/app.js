@@ -54,8 +54,8 @@ function respondToCardClick() {
 }
 
 function displayCardSymbol(e) {
-  e.target.classList.add('show', 'open');
   let clickedCard = e.target;
+  clickedCard.classList.add('show', 'open');
   openCards.push(clickedCard);
   checkMatch();
 }
@@ -70,6 +70,10 @@ function checkMatch() {
   }
 }
 
+function areSameCards() {
+  return openCards[0].innerHTML === openCards[1].innerHTML;
+}
+
 function isNotMatch() {
   for (let i = 0; i < openCards.length; i++) {
     openCards[i].classList.remove('show', 'open');
@@ -82,10 +86,6 @@ function isMatch() {
     openCards[i].classList.add('match');
   }
   openCards.length = 0;
-}
-
-function areSameCards() {
-  return openCards[0].innerHTML === openCards[1].innerHTML;
 }
 
 memoryGame();
