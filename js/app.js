@@ -26,8 +26,7 @@
  */
 
 
-const card = document.getElementsByClassName('card');
-const allCards = [];
+const allCards = document.getElementsByClassName('card');
 const openCards = [];
 
 function shuffle(array) {
@@ -45,8 +44,12 @@ function shuffle(array) {
 }
 
 function memoryGame() {
-  for (let i = 0; i < card.length; i++) {
-    card[i].addEventListener('click', displayCardSymbol);
+  respondToCardClick();
+}
+
+function respondToCardClick() {
+  for (let i = 0; i < allCards.length; i++) {
+    allCards[i].addEventListener('click', displayCardSymbol);
   }
 }
 
@@ -54,29 +57,35 @@ function displayCardSymbol(e) {
   e.target.classList.add('show', 'open');
   let clickedCard = e.target;
   openCards.push(clickedCard);
-  console.log(openCards);
-  isMatch();
+  checkMatch();
+}
+
+function checkMatch() {
+  if (openCards.length === 2) {
+    if (areSameCards()) {
+      isMatch();
+    } else {
+      setTimeout(isNotMatch, 500);
+    }
+  }
+}
+
+function isNotMatch() {
+  for (let i = 0; i < openCards.length; i++) {
+    openCards[i].classList.remove('show', 'open');
+  }
+  openCards.length = 0;
 }
 
 function isMatch() {
-  if (openCards.length === 2) {
-    console.log('Two open cards');
-    if (openCards[0].innerHTML === openCards[1].innerHTML) {
-      console.log('Matched');
-      for (let i = 0; i < openCards.length; i++) {
-        openCards[i].classList.add('match');
-      }
-      openCards.length = 0;
-      console.log(openCards);
-    } else {
-      console.log('Not matched');
-      for (let i = 0; i < openCards.length; i++) {
-        openCards[i].classList.remove('show', 'open');
-      }
-      openCards.length = 0;
-      console.log(openCards);
-    }
+  for (let i = 0; i < openCards.length; i++) {
+    openCards[i].classList.add('match');
   }
+  openCards.length = 0;
+}
+
+function areSameCards() {
+  return openCards[0].innerHTML === openCards[1].innerHTML;
 }
 
 memoryGame();
