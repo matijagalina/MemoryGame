@@ -30,6 +30,7 @@ const allCards = document.getElementsByClassName('card');
 const openCards = [];
 var movesContainer = document.getElementById('moves_counter');
 var currentMove = Number(movesContainer.innerHTML);
+var matchedCards = 0;
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -67,10 +68,11 @@ function displayCardSymbol(e) {
 }
 
 function checkMatch() {
-  allMatched();
+  
   if (openCards.length === 2) {
     if (areSameCards()) {
       isMatch();
+      allMatched();
     } else {
       setTimeout(isNotMatch, 500);
     }
@@ -93,20 +95,14 @@ function isMatch() {
     openCards[i].classList.add('match');
   }
   openCards.length = 0;
+  matchedCards += 1;
 }
 
 function allMatched() {
-  var matched = 0;
-  for (let i = 0; i < allCards.length; i++) {
-    if (allCards[i].className.indexOf('match') != -1) {
-      matched += 1;
-    }
+  if (matchedCards === 8) {
+    console.log("Succes");
   }
-  if (matched.length === 16) {
-    console.log("All are matched");
-  } else {
-    return;
-  }
+  return;
 }
 
 function handleMovesCounter() {
