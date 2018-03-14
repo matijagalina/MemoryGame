@@ -32,6 +32,10 @@ var movesContainer = document.getElementById('moves_counter');
 var currentMove = Number(movesContainer.innerHTML);
 var matchedCards = 0;
 
+function memoryGame() {
+  respondToCardClick();
+}
+
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -44,10 +48,6 @@ function shuffle(array) {
   }
 
   return array;
-}
-
-function memoryGame() {
-  respondToCardClick();
 }
 
 function respondToCardClick() {
@@ -68,7 +68,6 @@ function displayCardSymbol(e) {
 }
 
 function checkMatch() {
-  
   if (openCards.length === 2) {
     if (areSameCards()) {
       isMatch();
