@@ -55,10 +55,13 @@ function respondToCardClick() {
 
 function displayCardSymbol(e) {
   let clickedCard = e.target;
+  if (clickedCard.classList.contains('show', 'open')) {
+    return;
+  }
   clickedCard.classList.add('show', 'open');
   openCards.push(clickedCard);
   checkMatch();
-
+  handleMovesCounter();
 }
 
 function checkMatch() {
@@ -88,5 +91,14 @@ function isMatch() {
   }
   openCards.length = 0;
 }
+
+function handleMovesCounter() {
+  var movesContainer = document.getElementById('moves_counter');
+  var currentMove = Number(movesContainer.innerHTML);
+  currentMove = currentMove + 1;
+  movesContainer.innerHTML = currentMove;
+}
+
+
 
 memoryGame();
