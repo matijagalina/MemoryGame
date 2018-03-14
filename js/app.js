@@ -28,13 +28,18 @@
 // Nodelist of all cards elements
 const allCards = document.getElementsByClassName('card');
 // list of all cards
-const openCards = [];
-var movesContainer = document.getElementById('moves_counter');
-var currentMove = Number(movesContainer.innerHTML);
-var matchedCards = 0;
+let openCards = [];
+const movesContainer = document.getElementById('moves_counter');
+let currentMove = Number(movesContainer.innerHTML);
+let matchedCards = 0;
 // variables holding start and end time
-var startTime;
-var endTime;
+let startTime;
+let endTime;
+// modal elements
+const victoryModal = document.getElementById('victory_modal');
+const timeModal = document.getElementById('time_to_win');
+const starsModal = document.getElementById('stars_at_end');
+
 
 function memoryGame() {
   respondToCardClick();
@@ -114,8 +119,11 @@ function isMatch() {
 // checks if all cards are matched - when there are 8 paired cards
 function allMatched() {
   if (matchedCards === 8) {
-    endTime = performance.now()
-    console.log("Succes - the needed time was: " + (endTime - startTime) + " milliseconds.");
+    endTime = performance.now();
+    victoryModal.style.display = "flex";
+    timeModal.innerHTML = "The needed time was: " + (endTime - startTime) + " milliseconds.";
+    let remainedStars = document.querySelectorAll('.fa-star').length;
+    starsModal.innerHTML = "You have won " + remainedStars + " stars";
   }
   return;
 }
@@ -129,8 +137,8 @@ function handleMovesCounter() {
 
 // removes stars after a number of moves
 function handleStars() {
-  var starsContainer = document.querySelector('.stars');
-  var lastStar = starsContainer.lastElementChild;
+  const starsContainer = document.querySelector('.stars');
+  let lastStar = starsContainer.lastElementChild;
   if (currentMove === 21) {
     lastStar.remove();
   } else if (currentMove === 30) {

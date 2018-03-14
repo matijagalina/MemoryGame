@@ -110,4 +110,17 @@ h1 {
 
 #victory_modal {
     display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1000;
+    text-align: center;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 7px;
+}
+
+#modal_restart {
+    background-color: aquamarine;
+    width: 30%;
+    align-self: center;
 }
