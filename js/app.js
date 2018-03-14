@@ -58,6 +58,7 @@ function displayCardSymbol(e) {
   clickedCard.classList.add('show', 'open');
   openCards.push(clickedCard);
   checkMatch();
+
 }
 
 function checkMatch() {
