@@ -31,6 +31,8 @@ const openCards = [];
 var movesContainer = document.getElementById('moves_counter');
 var currentMove = Number(movesContainer.innerHTML);
 var matchedCards = 0;
+var startTime;
+var endTime;
 
 function memoryGame() {
   respondToCardClick();
@@ -51,6 +53,7 @@ function shuffle(array) {
 }
 
 function respondToCardClick() {
+  startTime = performance.now();
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].addEventListener('click', displayCardSymbol);
   }
@@ -99,7 +102,8 @@ function isMatch() {
 
 function allMatched() {
   if (matchedCards === 8) {
-    console.log("Succes");
+    endTime = performance.now()
+    console.log("Succes - the needed time was: " + (endTime- startTime) + " milliseconds.");
   }
   return;
 }
