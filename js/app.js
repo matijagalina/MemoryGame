@@ -67,6 +67,7 @@ function displayCardSymbol(e) {
 }
 
 function checkMatch() {
+  allMatched();
   if (openCards.length === 2) {
     if (areSameCards()) {
       isMatch();
@@ -92,6 +93,20 @@ function isMatch() {
     openCards[i].classList.add('match');
   }
   openCards.length = 0;
+}
+
+function allMatched() {
+  var matched = 0;
+  for (let i = 0; i < allCards.length; i++) {
+    if (allCards[i].className.indexOf('match') != -1) {
+      matched += 1;
+    }
+  }
+  if (matched.length === 16) {
+    console.log("All are matched");
+  } else {
+    return;
+  }
 }
 
 function handleMovesCounter() {
