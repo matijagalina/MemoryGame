@@ -25,12 +25,14 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-
+// Nodelist of all cards elements
 const allCards = document.getElementsByClassName('card');
+// list of all cards
 const openCards = [];
 var movesContainer = document.getElementById('moves_counter');
 var currentMove = Number(movesContainer.innerHTML);
 var matchedCards = 0;
+// variables holding start and end time
 var startTime;
 var endTime;
 
@@ -52,13 +54,16 @@ function shuffle(array) {
   return array;
 }
 
+// adds event listeners to all cards
 function respondToCardClick() {
+  // Starts measuring the time --- put later in another function, smthng like restart
   startTime = performance.now();
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].addEventListener('click', displayCardSymbol);
   }
 }
 
+// displays symbol of the card by adding css class
 function displayCardSymbol(e) {
   let clickedCard = e.target;
   if (clickedCard.classList.contains('show', 'open')) {
@@ -70,6 +75,7 @@ function displayCardSymbol(e) {
   handleMovesCounter();
 }
 
+// handles card matching
 function checkMatch() {
   if (openCards.length === 2) {
     if (areSameCards()) {
@@ -81,39 +87,47 @@ function checkMatch() {
   }
 }
 
+// checks if the two open cards are the same
 function areSameCards() {
   return openCards[0].innerHTML === openCards[1].innerHTML;
 }
 
+// handles two different clicked cards
 function isNotMatch() {
   for (let i = 0; i < openCards.length; i++) {
     openCards[i].classList.remove('show', 'open');
   }
+  // empties the open cards container
   openCards.length = 0;
 }
 
+// handles when clicked cards are matched
 function isMatch() {
   for (let i = 0; i < openCards.length; i++) {
     openCards[i].classList.add('match');
   }
   openCards.length = 0;
+  // increments the match number counter
   matchedCards += 1;
 }
 
+// checks if all cards are matched - when there are 8 paired cards
 function allMatched() {
   if (matchedCards === 8) {
     endTime = performance.now()
-    console.log("Succes - the needed time was: " + (endTime- startTime) + " milliseconds.");
+    console.log("Succes - the needed time was: " + (endTime - startTime) + " milliseconds.");
   }
   return;
 }
 
+// increments the moves counter
 function handleMovesCounter() {
   currentMove = currentMove + 1;
   movesContainer.innerHTML = currentMove;
   handleStars();
 }
 
+// removes stars after a number of moves
 function handleStars() {
   var starsContainer = document.querySelector('.stars');
   var lastStar = starsContainer.lastElementChild;
@@ -124,4 +138,5 @@ function handleStars() {
   }
 }
 
+// starts a game
 memoryGame();
