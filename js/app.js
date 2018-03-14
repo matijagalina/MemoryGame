@@ -28,6 +28,8 @@
 
 const allCards = document.getElementsByClassName('card');
 const openCards = [];
+var movesContainer = document.getElementById('moves_counter');
+var currentMove = Number(movesContainer.innerHTML);
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -93,12 +95,19 @@ function isMatch() {
 }
 
 function handleMovesCounter() {
-  var movesContainer = document.getElementById('moves_counter');
-  var currentMove = Number(movesContainer.innerHTML);
   currentMove = currentMove + 1;
   movesContainer.innerHTML = currentMove;
+  handleStars();
 }
 
-
+function handleStars() {
+  var starsContainer = document.querySelector('.stars');
+  var lastStar = starsContainer.lastElementChild;
+  if (currentMove === 21) {
+    lastStar.remove();
+  } else if (currentMove === 30) {
+    lastStar.remove();
+  }
+}
 
 memoryGame();
