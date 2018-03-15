@@ -52,6 +52,9 @@ const starsModal = document.getElementById('stars_at_end');
 
 const restart = document.getElementsByClassName('restart');
 
+const stopWatch = document.querySelector('.timer');
+let seconds = 0, minutes = 0, hours = 0, t;
+
 
 function memoryGame() {
   createNewDeck();
@@ -82,6 +85,7 @@ function createNewDeck() {
 function respondToCardClick() {
   // Starts measuring the time --- put later in another function, smthng like restart
   startTime = performance.now();
+  timer();
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].addEventListener('click', displayCardSymbol);
   }
@@ -146,6 +150,7 @@ function millisToMinutesAndSeconds(millis) {
 function allMatched() {
   if (matchedCards === 8) {
     endTime = performance.now();
+    clearTimeout(t);
     finalTime = millisToMinutesAndSeconds(endTime - startTime);
     victoryModal.style.display = "flex";
     timeModal.innerHTML = "The needed time was " + finalTime + " min.";
@@ -181,6 +186,29 @@ function restartGame() {
   for (let i = 0; i < restart.length; i++) {
     restart[i].addEventListener('click', memoryGame);
   }
+}
+
+// Timer function
+function add() {
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+  }
+
+  stopWatch.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
+    (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+    (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+
+function timer() {
+  t = setTimeout(add, 1000);
 }
 
 // starts a game
