@@ -87,7 +87,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 380px;
     margin-bottom: 10px;
 }
 
@@ -125,7 +125,22 @@ h1 {
     align-self: center;
 }
 
+.restart {
+    font-size: 1.2rem;
+}
+
 .timer {
     margin-left: 10px;
     display: inline;
+    color: #d45252;
+}
+
+.start {
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-right: 20px;
+    padding: 10px;
 }
