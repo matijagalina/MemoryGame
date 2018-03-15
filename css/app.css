@@ -119,10 +119,25 @@ h1 {
     border-radius: 7px;
 }
 
+#victory_modal h2 {
+    margin: 0;
+}
+
+#stars_at_end {
+    margin-top: 0;
+}
+
 #modal_restart {
-    background-color: aquamarine;
-    width: 30%;
+    background-color: #b8c7e2;
+    width: 130px;
     align-self: center;
+    border: none;
+    box-shadow: 2px 2px rgba(46, 61, 73, 0.5);
+    cursor: pointer;
+}
+
+#modal_restart:hover {
+    color: #fff;
 }
 
 .restart {
