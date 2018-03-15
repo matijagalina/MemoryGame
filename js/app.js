@@ -20,17 +20,6 @@
               '<i class="fa fa-cube"></i>'
 ]
 
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -44,18 +33,6 @@ function shuffle(array) {
 
   return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 
 const deckOfCards = document.querySelector('.deck');
 // Nodelist of all cards elements
@@ -82,9 +59,16 @@ function memoryGame() {
   restartGame();
 }
 
+function cleanSlate() {
+  victoryModal.style.display = 'none';
+  movesContainer.innerHTML = '0';
+  currentMove = 0;
+  deckOfCards.innerHTML = "";
+}
+
 // shuffles the array of cards and creates a new deck
 function createNewDeck() {
-  deckOfCards.innerHTML = "";
+  cleanSlate();
   cards = shuffle(cards);
   for (let i = 0; i < cards.length; i++) {
     let card = document.createElement('li');
@@ -151,19 +135,26 @@ function isMatch() {
   matchedCards += 1;
 }
 
+// Turns milliseconds to minutes and seconds (from - https://goo.gl/Ux9sPb)
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
 // checks if all cards are matched - when there are 8 paired cards
 function allMatched() {
   if (matchedCards === 8) {
     endTime = performance.now();
+    finalTime = millisToMinutesAndSeconds(endTime - startTime);
     victoryModal.style.display = "flex";
-    timeModal.innerHTML = "The needed time was: " + (endTime - startTime) + " milliseconds.";
+    timeModal.innerHTML = "The needed time was " + finalTime + " min.";
     let remainedStars = document.querySelectorAll('.fa-star').length;
     if (remainedStars === 1) {
       starsModal.innerHTML = "You have won " + remainedStars + " star";
     } else {
       starsModal.innerHTML = "You have won " + remainedStars + " stars";
     }
-    
   }
   return;
 }
@@ -179,9 +170,9 @@ function handleMovesCounter() {
 function handleStars() {
   const starsContainer = document.querySelector('.stars');
   let lastStar = starsContainer.lastElementChild;
-  if (currentMove === 21) {
+  if (currentMove === 31) {
     lastStar.remove();
-  } else if (currentMove === 30) {
+  } else if (currentMove === 41) {
     lastStar.remove();
   }
 }
