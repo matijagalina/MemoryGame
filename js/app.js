@@ -1,8 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
-
- let cards = ['<i class="fa fa-diamond"></i>',
+let cards = ['<i class="fa fa-diamond"></i>',
               '<i class="fa fa-paper-plane-o"></i>',
               '<i class="fa fa-anchor"></i>',
               '<i class="fa fa-bolt"></i>',
@@ -55,12 +51,8 @@ const restart = document.getElementsByClassName('restart');
 const stopWatch = document.querySelector('.timer');
 let seconds = 0, minutes = 0, hours = 0, t;
 
+const startButton = document.querySelector('.start');
 
-function memoryGame() {
-  createNewDeck();
-  respondToCardClick();
-  restartGame();
-}
 
 function cleanSlate() {
   victoryModal.style.display = 'none';
@@ -81,11 +73,17 @@ function createNewDeck() {
   }
 }
 
+function startGame() {
+  startButton.addEventListener('click', function() {
+    startTime = performance.now();
+    timer();
+    memoryGame();
+  })
+}
+
 // adds event listeners to all cards
 function respondToCardClick() {
   // Starts measuring the time --- put later in another function, smthng like restart
-  startTime = performance.now();
-  timer();
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].addEventListener('click', displayCardSymbol);
   }
@@ -150,7 +148,7 @@ function millisToMinutesAndSeconds(millis) {
 function allMatched() {
   if (matchedCards === 8) {
     endTime = performance.now();
-    clearTimeout(t);
+    restartTime();
     finalTime = millisToMinutesAndSeconds(endTime - startTime);
     victoryModal.style.display = "flex";
     timeModal.innerHTML = "The needed time was " + finalTime + " min.";
@@ -184,7 +182,11 @@ function handleStars() {
 
 function restartGame() {
   for (let i = 0; i < restart.length; i++) {
-    restart[i].addEventListener('click', memoryGame);
+    restart[i].addEventListener('click', function(){
+      restartTime();
+      timer();
+      memoryGame();
+    });
   }
 }
 
@@ -211,5 +213,17 @@ function timer() {
   t = setTimeout(add, 1000);
 }
 
+function restartTime() {
+  clearTimeout(t);
+  stopWatch.textContent = "00:00:00";
+  seconds = 0; minutes = 0; hours = 0;
+}
+
+function memoryGame() {
+  createNewDeck();
+  respondToCardClick();
+  restartGame();
+}
+
 // starts a game
-memoryGame();
+startGame();
