@@ -2,6 +2,25 @@
  * Create a list that holds all of your cards
  */
 
+ let cards = ['<i class="fa fa-diamond"></i>',
+              '<i class="fa fa-paper-plane-o"></i>',
+              '<i class="fa fa-anchor"></i>',
+              '<i class="fa fa-bolt"></i>',
+              '<i class="fa fa-cube"></i>',
+              '<i class="fa fa-anchor"></i>',
+              '<i class="fa fa-leaf"></i>',
+              '<i class="fa fa-bicycle"></i>',
+              '<i class="fa fa-diamond"></i>',
+              '<i class="fa fa-bomb"></i>',
+              '<i class="fa fa-leaf"></i>',
+              '<i class="fa fa-bomb"></i>',
+              '<i class="fa fa-bolt"></i>',
+              '<i class="fa fa-bicycle"></i>',
+              '<i class="fa fa-paper-plane-o"></i>',
+              '<i class="fa fa-cube"></i>'
+]
+
+
 
 /*
  * Display the cards on the page
@@ -12,6 +31,19 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 
 /*
@@ -25,6 +57,7 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+const deckOfCards = document.querySelector('.deck');
 // Nodelist of all cards elements
 const allCards = document.getElementsByClassName('card');
 // list of all cards
@@ -40,23 +73,25 @@ const victoryModal = document.getElementById('victory_modal');
 const timeModal = document.getElementById('time_to_win');
 const starsModal = document.getElementById('stars_at_end');
 
+const restart = document.getElementsByClassName('restart');
+
 
 function memoryGame() {
+  createNewDeck();
   respondToCardClick();
+  restartGame();
 }
 
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+// shuffles the array of cards and creates a new deck
+function createNewDeck() {
+  deckOfCards.innerHTML = "";
+  cards = shuffle(cards);
+  for (let i = 0; i < cards.length; i++) {
+    let card = document.createElement('li');
+    card.className = 'card';
+    card.innerHTML = cards[i];
+    deckOfCards.appendChild(card);
   }
-
-  return array;
 }
 
 // adds event listeners to all cards
@@ -123,7 +158,12 @@ function allMatched() {
     victoryModal.style.display = "flex";
     timeModal.innerHTML = "The needed time was: " + (endTime - startTime) + " milliseconds.";
     let remainedStars = document.querySelectorAll('.fa-star').length;
-    starsModal.innerHTML = "You have won " + remainedStars + " stars";
+    if (remainedStars === 1) {
+      starsModal.innerHTML = "You have won " + remainedStars + " star";
+    } else {
+      starsModal.innerHTML = "You have won " + remainedStars + " stars";
+    }
+    
   }
   return;
 }
@@ -143,6 +183,12 @@ function handleStars() {
     lastStar.remove();
   } else if (currentMove === 30) {
     lastStar.remove();
+  }
+}
+
+function restartGame() {
+  for (let i = 0; i < restart.length; i++) {
+    restart[i].addEventListener('click', memoryGame);
   }
 }
 
