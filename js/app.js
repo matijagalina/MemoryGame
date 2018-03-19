@@ -1,19 +1,19 @@
 let cards = ['<i class="fa fa-diamond"></i>',
-              '<i class="fa fa-paper-plane-o"></i>',
-              '<i class="fa fa-anchor"></i>',
-              '<i class="fa fa-bolt"></i>',
-              '<i class="fa fa-cube"></i>',
-              '<i class="fa fa-anchor"></i>',
-              '<i class="fa fa-leaf"></i>',
-              '<i class="fa fa-bicycle"></i>',
-              '<i class="fa fa-diamond"></i>',
-              '<i class="fa fa-bomb"></i>',
-              '<i class="fa fa-leaf"></i>',
-              '<i class="fa fa-bomb"></i>',
-              '<i class="fa fa-bolt"></i>',
-              '<i class="fa fa-bicycle"></i>',
-              '<i class="fa fa-paper-plane-o"></i>',
-              '<i class="fa fa-cube"></i>'
+  '<i class="fa fa-paper-plane-o"></i>',
+  '<i class="fa fa-anchor"></i>',
+  '<i class="fa fa-bolt"></i>',
+  '<i class="fa fa-cube"></i>',
+  '<i class="fa fa-anchor"></i>',
+  '<i class="fa fa-leaf"></i>',
+  '<i class="fa fa-bicycle"></i>',
+  '<i class="fa fa-diamond"></i>',
+  '<i class="fa fa-bomb"></i>',
+  '<i class="fa fa-leaf"></i>',
+  '<i class="fa fa-bomb"></i>',
+  '<i class="fa fa-bolt"></i>',
+  '<i class="fa fa-bicycle"></i>',
+  '<i class="fa fa-paper-plane-o"></i>',
+  '<i class="fa fa-cube"></i>'
 ]
 
 function shuffle(array) {
@@ -74,7 +74,7 @@ function createNewDeck() {
 }
 
 function startGame() {
-  startButton.addEventListener('click', function() {
+  startButton.addEventListener('click', function () {
     startTime = performance.now();
     timer();
     memoryGame();
@@ -166,25 +166,33 @@ function allMatched() {
 function handleMovesCounter() {
   currentMove = currentMove + 1;
   movesContainer.innerHTML = currentMove;
-  handleStars();
+  hideStars();
 }
 
 // removes stars after a number of moves
-function handleStars() {
+function hideStars() {
   const starsContainer = document.querySelector('.stars');
   let lastStar = starsContainer.lastElementChild;
   if (currentMove === 31) {
-    lastStar.remove();
+    lastStar.style.display = 'none';
   } else if (currentMove === 41) {
-    lastStar.remove();
+    lastStar.style.display = 'none';
+  }
+}
+
+function showStars() {
+  const allStars = document.querySelectorAll('.stars li');
+  for (let i = 0; i < allStars.length; i++) {
+    allStars[i].style.display = 'inline-block';
   }
 }
 
 function restartGame() {
   for (let i = 0; i < restart.length; i++) {
-    restart[i].addEventListener('click', function(){
+    restart[i].addEventListener('click', function () {
       restartTime();
       timer();
+      showStars();
       memoryGame();
     });
   }
@@ -206,7 +214,7 @@ function add() {
     (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
     (seconds > 9 ? seconds : "0" + seconds);
 
-    timer();
+  timer();
 }
 
 function timer() {
