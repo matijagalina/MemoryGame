@@ -1,34 +1,4 @@
-let cards = ['<i class="fa fa-diamond"></i>',
-  '<i class="fa fa-paper-plane-o"></i>',
-  '<i class="fa fa-anchor"></i>',
-  '<i class="fa fa-bolt"></i>',
-  '<i class="fa fa-cube"></i>',
-  '<i class="fa fa-anchor"></i>',
-  '<i class="fa fa-leaf"></i>',
-  '<i class="fa fa-bicycle"></i>',
-  '<i class="fa fa-diamond"></i>',
-  '<i class="fa fa-bomb"></i>',
-  '<i class="fa fa-leaf"></i>',
-  '<i class="fa fa-bomb"></i>',
-  '<i class="fa fa-bolt"></i>',
-  '<i class="fa fa-bicycle"></i>',
-  '<i class="fa fa-paper-plane-o"></i>',
-  '<i class="fa fa-cube"></i>'
-]
-
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
+// Global variables used in the code
 
 const deckOfCards = document.querySelector('.deck');
 // Nodelist of all cards elements
@@ -56,6 +26,38 @@ let seconds = 0, minutes = 0, hours = 0, t;
 // start button at the beginning
 const startButton = document.querySelector('.start');
 
+let cards = ['<i class="fa fa-diamond"></i>',
+  '<i class="fa fa-paper-plane-o"></i>',
+  '<i class="fa fa-anchor"></i>',
+  '<i class="fa fa-bolt"></i>',
+  '<i class="fa fa-cube"></i>',
+  '<i class="fa fa-anchor"></i>',
+  '<i class="fa fa-leaf"></i>',
+  '<i class="fa fa-bicycle"></i>',
+  '<i class="fa fa-diamond"></i>',
+  '<i class="fa fa-bomb"></i>',
+  '<i class="fa fa-leaf"></i>',
+  '<i class="fa fa-bomb"></i>',
+  '<i class="fa fa-bolt"></i>',
+  '<i class="fa fa-bicycle"></i>',
+  '<i class="fa fa-paper-plane-o"></i>',
+  '<i class="fa fa-cube"></i>'
+]
+
+// shuffle the cards function
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 // turns back everything
 function cleanSlate() {
