@@ -26,6 +26,8 @@ let seconds = 0, minutes = 0, hours = 0, t;
 // start button at the beginning
 const startButton = document.querySelector('.start');
 
+const starsContainer = document.querySelector('.stars');
+
 let cards = ['<i class="fa fa-diamond"></i>',
   '<i class="fa fa-paper-plane-o"></i>',
   '<i class="fa fa-anchor"></i>',
@@ -177,21 +179,18 @@ function handleMovesCounter() {
 
 // removes stars after a number of moves
 function hideStars() {
-  const starsContainer = document.querySelector('.stars');
   let lastStar = starsContainer.lastElementChild;
   if (currentMove === 31) {
-    lastStar.style.display = 'none';
+    lastStar.remove();
   } else if (currentMove === 41) {
-    lastStar.style.display = 'none';
+    lastStar.remove();
   }
 }
 
 // showes stars after restart or new game
 function showStars() {
-  const allStars = document.querySelectorAll('.stars li');
-  for (let i = 0; i < allStars.length; i++) {
-    allStars[i].style.display = 'inline-block';
-  }
+  starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>' +
+  '<li><i class="fa fa-star"></i>' + '</li><li><i class="fa fa-star"></i></li>';
 }
 
 function restartGame() {
