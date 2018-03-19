@@ -46,14 +46,18 @@ const victoryModal = document.getElementById('victory_modal');
 const timeModal = document.getElementById('time_to_win');
 const starsModal = document.getElementById('stars_at_end');
 
+// restart button 
 const restart = document.getElementsByClassName('restart');
 
+// timer elements
 const stopWatch = document.querySelector('.timer');
 let seconds = 0, minutes = 0, hours = 0, t;
 
+// start button at the beginning
 const startButton = document.querySelector('.start');
 
 
+// turns back everything
 function cleanSlate() {
   victoryModal.style.display = 'none';
   movesContainer.innerHTML = '0';
@@ -180,6 +184,7 @@ function hideStars() {
   }
 }
 
+// showes stars after restart or new game
 function showStars() {
   const allStars = document.querySelectorAll('.stars li');
   for (let i = 0; i < allStars.length; i++) {
