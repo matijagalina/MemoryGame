@@ -1,5 +1,7 @@
 # Memory Game Project
 
+This is a Memory Game project made for the purpose of Udacity Front-end Nanodegree course.
+
 ## Table of Contents
 
 * [Instructions](#instructions)
@@ -7,14 +9,15 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Goal of the game is to match every tile.
+There are no time limits, but the timer will go on until you finish it.
+More moves you make the lower star rating will be at the end.
+The match is confirmed when two open tiles share the same sign and their background turns green.
+At the end the modal window will appear and show how much time did you need to win, how many stars did you win
+and it will offer you a chance to play again.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+The game is written using only **vanilla Javascript, html5 and css3.**
+The attention was given to it's functionality and there is much to improve regarding the styling and added features.
+Code is free for you to use and build upon it.
