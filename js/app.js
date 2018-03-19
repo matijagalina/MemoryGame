@@ -66,6 +66,7 @@ function cleanSlate() {
   victoryModal.style.display = 'none';
   movesContainer.innerHTML = '0';
   currentMove = 0;
+  matchedCards = 0;
   deckOfCards.innerHTML = "";
 }
 
