@@ -205,7 +205,7 @@ function restartGame() {
   }
 }
 
-// Timer function
+// Timer function based on https://jsfiddle.net/Daniel_Hug/pvk6p/
 function add() {
   seconds++;
   if (seconds >= 60) {
