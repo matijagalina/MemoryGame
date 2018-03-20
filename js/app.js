@@ -44,7 +44,7 @@ let cards = ['<i class="fa fa-diamond"></i>',
   '<i class="fa fa-bicycle"></i>',
   '<i class="fa fa-paper-plane-o"></i>',
   '<i class="fa fa-cube"></i>'
-]
+];
 
 // shuffle the cards function
 function shuffle(array) {
@@ -87,7 +87,7 @@ function startGame() {
     startTime = performance.now();
     timer();
     memoryGame();
-  })
+  });
 }
 
 // adds event listeners to all cards
@@ -158,7 +158,7 @@ function allMatched() {
   if (matchedCards === 8) {
     endTime = performance.now();
     restartTime();
-    finalTime = millisToMinutesAndSeconds(endTime - startTime);
+    let finalTime = millisToMinutesAndSeconds(endTime - startTime);
     victoryModal.style.display = "flex";
     timeModal.innerHTML = "The needed time was " + finalTime + " min.";
     let remainedStars = document.querySelectorAll('.fa-star').length;
