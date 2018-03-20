@@ -191,18 +191,20 @@ function hideStars() {
 // showes stars after restart or new game
 function showStars() {
   starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>' +
-  '<li><i class="fa fa-star"></i>' + '</li><li><i class="fa fa-star"></i></li>';
+    '<li><i class="fa fa-star"></i>' + '</li><li><i class="fa fa-star"></i></li>';
 }
 
 function restartGame() {
   for (let i = 0; i < restart.length; i++) {
-    restart[i].addEventListener('click', function () {
-      restartTime();
-      timer();
-      showStars();
-      memoryGame();
-    });
+    restart[i].addEventListener('click', handleRestart);
   }
+}
+
+function handleRestart() {
+  restartTime();
+  timer();
+  showStars();
+  memoryGame();
 }
 
 // Timer function based on https://jsfiddle.net/Daniel_Hug/pvk6p/
