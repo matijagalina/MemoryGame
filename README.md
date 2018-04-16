@@ -1,6 +1,7 @@
 # Memory Game Project
 
 This is a Memory Game project made for the purpose of Udacity Front-end Nanodegree course.
+It's availaible at https://matijagalina.github.io/MemoryGame/
 
 ## Table of Contents
 
